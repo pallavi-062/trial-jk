@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>J & K Events | Royal Wedding & Choreography</title>
+  <!-- Google Fonts: Elegant Serif + Modern Sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Swiper JS for testimonials -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #ececec;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, h4, .logo-font {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    /* SCROLL PROGRESS BAR */
+    .progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 215, 0, 0.2);
+      z-index: 10000;
+    }
+    .progress-bar {
+      height: 4px;
+      background: linear-gradient(90deg, #FFD700, #ffb347);
+      width: 0%;
+      box-shadow: 0 0 8px gold;
+      transition: width 0.1s;
+    }
+
+    /* STICKY NAVBAR - LUXURY GLASS */
+    .navbar {
+      position: fixed;
+      top: 4px;
+      left: 0;
+      width: 100%;
+      padding: 0.9rem 2rem;
+      background: rgba(5, 5, 5, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.35);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+    .logo {
+      font-size: 1.9rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #FFD700);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+    }
+    .logo span {
+      color: #FFD700;
+      background: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FFD700;
+      box-shadow: 0 0 8px gold;
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after {
+      width: 100%;
+    }
+    .nav-links a:hover {
+      color: #FFD700;
+    }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      color: #FFD700;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    /* FLOATING ACTION BUTTONS */
+    .floating-actions {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 1100;
+    }
+    .fab-btn {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,215,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      color: #FFD700;
+      cursor: pointer;
+      transition: 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    }
+    .fab-btn:hover {
+      transform: scale(1.12) rotate(5deg);
+      background: #FFD700;
+      color: black;
+      border-color: white;
+      box-shadow: 0 0 25px gold;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, rgba(0,0,0,0.65), rgba(0,0,0,0.55)), url("./images/cover.jpg") center/cover fixed;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding-top: 100px;
+    }
+    .hero-overlay {
+      width: 100%;
+      padding: 20px;
+    }
+    .typing-text {
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      font-weight: 800;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 1rem;
+    }
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      background: gold;
+      margin-left: 5px;
+      animation: blink 0.8s infinite;
+    }
+    @keyframes blink {
+      0%,100%{ opacity: 1; } 50%{ opacity: 0; }
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      letter-spacing: 2px;
+      margin-bottom: 2rem;
+    }
+    .btn-gold {
+      background: transparent;
+      border: 2px solid #FFD700;
+      color: #FFD700;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 40px;
+      transition: 0.3s;
+      cursor: pointer;
+      backdrop-filter: blur(5px);
+    }
+    .btn-gold:hover {
+      background: #FFD700;
+      color: #0a0a0a;
+      box-shadow: 0 0 40px gold;
+      transform: scale(1.02);
+    }
+
+    /* SECTION TITLE */
+    .section-title {
+      text-align: center;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #FFD700;
+      margin: 12px auto 0;
+      box-shadow: 0 0 15px gold;
+    }
+
+    /* SERVICES SECTION WITH IMAGES */
+    .services, .choreography, .events-gallery, .testimonials, .build-event, .contact-section {
+      padding: 80px 20px;
+    }
+    .services { background: #050505; }
+    .choreography { background: #0a0a0a; }
+    .services-grid, .choreo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1300px;
+      margin: auto;
+    }
+    .service-card, .choreo-card {
+      background: #111;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(255,215,0,0.2);
+      cursor: pointer;
+    }
+    .service-card:hover, .choreo-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      border-color: #FFD700;
+      box-shadow: 0 0 35px rgba(255,215,0,0.4);
+    }
+    .service-img, .choreo-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.6s;
+    }
+    .service-card:hover .service-img, .choreo-card:hover .choreo-img {
+      transform: scale(1.05);
+    }
+    .service-info, .choreo-info {
+      padding: 25px;
+      text-align: center;
+    }
+    .service-info i, .choreo-info i {
+      font-size: 2rem;
+      color: #FFD700;
+      margin-bottom: 12px;
+    }
+    .service-info h3, .choreo-info h3 {
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    /* ========== MODERN FULLSCREEN MODAL GALLERY ========== */
+    .gallery-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.3s, opacity 0.4s ease;
+    }
+    .gallery-modal.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .modal-container {
+      position: relative;
+      width: 90%;
+      max-width: 1300px;
+      height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-main-image {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 28px;
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.3), 0 20px 35px rgba(0,0,0,0.5);
+      border: 2px solid rgba(255,215,0,0.6);
+      transition: transform 0.3s ease;
+      animation: zoomFadeIn 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      object-fit: contain;
+      background: #0a0a0a;
+    }
+    @keyframes zoomFadeIn {
+      0% { opacity: 0; transform: scale(0.92); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .modal-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,215,0,0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #FFD700;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 10;
+    }
+    .modal-nav:hover {
+      background: #FFD700;
+      color: #0a0a0a;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 0 25px gold;
+    }
+    .modal-prev { left: 15px; }
+    .modal-next { right: 15px; }
+    .modal-close {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      font-size: 2.8rem;
+      color: #FFD700;
+      cursor: pointer;
+      transition: 0.2s;
+      z-index: 20;
+      background: rgba(0,0,0,0.5);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,215,0,0.5);
+    }
+    .modal-close:hover {
+      transform: rotate(90deg);
+      background: #FFD700;
+      color: black;
+      box-shadow: 0 0 20px gold;
+    }
+    .modal-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(12px);
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-family: 'Montserrat', monospace;
+      font-size: 1rem;
+      color: #FFD700;
+      border: 1px solid rgba(255,215,0,0.5);
+      letter-spacing: 1px;
+      z-index: 10;
+    }
+    @media (max-width: 768px) {
+      .modal-nav { width: 40px; height: 40px; font-size: 1.2rem; }
+      .modal-prev { left: 5px; }
+      .modal-next { right: 5px; }
+      .modal-close { top: 15px; right: 15px; width: 42px; height: 42px; font-size: 1.8rem; }
+      .modal-counter { font-size: 0.8rem; bottom: 12px; }
+    }
+
+    /* Events Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      max-width: 1400px;
+      margin: auto;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 1/0.9;
+      cursor: pointer;
+      transition: 0.4s;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+    }
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.4s;
+      text-align: center;
+    }
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    .gallery-overlay i {
+      color: #FFD700;
+      font-size: 1.8rem;
+    }
+
+    /* Testimonials & others */
+    .testimonials { background: #0a0a0a; }
+    .swiper { width: 100%; padding: 40px 0; max-width: 1100px; }
+    .testimonial-card {
+      background: #141414;
+      border-radius: 30px;
+      padding: 35px;
+      text-align: center;
+      border: 1px solid #2a2a2a;
+      transition: 0.3s;
+    }
+    .testimonial-card:hover { border-color: #FFD700; box-shadow: 0 0 35px rgba(255,215,0,0.2); }
+    .testimonial-card i { color: #FFD700; font-size: 2.2rem; }
+    .testimonial-card h4 { margin-top: 18px; color: gold; }
+
+    .build-event { background: #050505; }
+    .event-builder {
+      max-width: 1000px;
+      margin: auto;
+      background: rgba(20,20,20,0.8);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 35px;
+      border: 1px solid rgba(255,215,0,0.25);
+    }
+    .builder-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .option-card {
+      background: #111;
+      padding: 20px 12px;
+      text-align: center;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: 0.3s;
+      border: 1px solid #2a2a2a;
+    }
+    .option-card.selected {
+      border: 2px solid #FFD700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.5);
+      background: #1f1f1f;
+    }
+    .option-card i { font-size: 2.2rem; color: #FFD700; margin-bottom: 12px; }
+    .builder-summary {
+      background: #0c0c0c;
+      border-radius: 32px;
+      padding: 25px;
+      text-align: center;
+    }
+    .summary-list { margin: 20px 0; list-style: none; min-height: 100px; }
+    .summary-list li { padding: 8px 0; border-bottom: 1px dashed #333; }
+
+    .contact-section { background: #0a0a0a; text-align: center; }
+    .contact-card {
+      max-width: 700px;
+      margin: auto;
+      background: #111;
+      border-radius: 40px;
+      padding: 40px;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+    .footer {
+      background: #020202;
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid rgba(255,215,0,0.3);
+    }
+    .social-icons a {
+      color: white;
+      font-size: 1.6rem;
+      margin: 0 15px;
+      transition: 0.3s;
+      display: inline-block;
+    }
+    .social-icons a:hover { color: #FFD700; transform: translateY(-5px); text-shadow: 0 0 15px gold; }
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, #fff 10%, transparent 10%);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transform: scale(10);
+      opacity: 0;
+      transition: transform 0.5s, opacity 0.8s;
+    }
+    .ripple:active:after {
+      transform: scale(0);
+      opacity: 0.4;
+      transition: 0s;
+    }
+
+    @media (max-width: 992px) {
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 70%;
+        height: calc(100vh - 70px);
+        background: rgba(0,0,0,0.96);
+        backdrop-filter: blur(18px);
+        flex-direction: column;
+        align-items: center;
+        padding-top: 2rem;
+        transition: 0.4s;
+        gap: 2rem;
+        border-right: 1px solid gold;
+      }
+      .nav-links.active { left: 0; }
+      .hamburger { display: block; }
+    }
+    @media (max-width: 560px) {
+      .navbar { padding: 0.7rem 1rem; }
+      .floating-actions { right: 12px; bottom: 12px; gap: 10px; }
+      .fab-btn { width: 48px; height: 48px; font-size: 1.3rem; }
+    }
+
+    /* ===== PREMIUM UI/UX ENHANCEMENTS ===== */
+    /* Custom Cursor & Light Effect */
+    .custom-cursor {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 215, 0, 0.15);
+      border: 2px solid rgba(255, 215, 0, 0.6);
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.2s ease, width 0.2s, height 0.2s, background 0.2s;
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(4px);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+    .custom-cursor::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #FFD700;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.8;
+    }
+    .custom-cursor.hover {
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 215, 0, 0.25);
+      border-color: #FFD700;
+      backdrop-filter: blur(8px);
+    }
+    /* Preloader */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0a0a0a;
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), visibility 0.8s;
+    }
+    .preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .preloader-ring {
+      width: 80px;
+      height: 80px;
+      border: 3px solid rgba(255, 215, 0, 0.2);
+      border-top: 3px solid #FFD700;
+      border-radius: 50%;
+      animation: preloaderSpin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    }
+    .preloader-text {
+      margin-top: 30px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      letter-spacing: 6px;
+      color: #FFD700;
+      font-weight: 300;
+      animation: preloaderPulse 1.5s ease infinite;
+    }
+    @keyframes preloaderSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes preloaderPulse {
+      0%, 100% { opacity: 0.4; letter-spacing: 6px; }
+      50% { opacity: 1; letter-spacing: 10px; }
+    }
+    /* Scroll Reveal */
+    section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    section.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Floating Particles */
+    .particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9998;
+    }
+    .particle {
+      position: fixed;
+      background: radial-gradient(circle, #FFD700, transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9997;
+      opacity: 0;
+      animation: particleFloat 8s ease-out infinite;
+    }
+    @keyframes particleFloat {
+      0% { opacity: 0; transform: translateY(0) scale(0); }
+      10% { opacity: 0.4; }
+      90% { opacity: 0.1; }
+      100% { opacity: 0; transform: translateY(-200px) scale(1.5); }
+    }
+    /* Glassmorphism Upgrade */
+    .navbar.scrolled {
+      background: rgba(5, 5, 5, 0.95);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+    .btn-gold {
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.4), transparent);
+      transition: left 0.6s ease;
+      z-index: -1;
+    }
+    .btn-gold:hover::before {
+      left: 100%;
+    }
+    .btn-gold:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(255, 215, 0, 0.5);
+      letter-spacing: 2px;
+    }
+    /* Modal image hover */
+    .modal-main-image:hover {
+      transform: scale(1.02);
+      cursor: zoom-in;
+    }
+    /* Typography elegance */
+    .section-title {
+      letter-spacing: 1px;
+      transition: letter-spacing 0.3s ease;
+    }
+    .section-title:hover {
+      letter-spacing: 3px;
+    }
+    /* Mobile touch improvements */
+    @media (max-width: 768px) {
+      .custom-cursor { display: none; }
+      .option-card:active, .btn-gold:active { transform: scale(0.98); transition: transform 0.1s ease; }
+    }
+  </style>
+</head>
+<body>
+<div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+<nav class="navbar">
+  <div class="logo">J & K <span>EVENTS</span></div>
+  <div class="hamburger" id="hamburger"><i class="fas fa-gem"></i></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#choreography">Choreography</a></li>
+    <li><a href="#events">Moments</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Connect</a></li>
+  </ul>
+</nav>
+
+<div class="floating-actions">
+  <div class="fab-btn" id="whatsappFloat"><i class="fab fa-whatsapp"></i></div>
+  <div class="fab-btn" id="callFloat"><i class="fas fa-phone-alt"></i></div>
+  <div class="fab-btn" id="instaFloat"><i class="fab fa-instagram"></i></div>
+</div>
+
+<section id="home" class="hero">
+  <div class="hero-overlay">
+    <div class="typing-text" id="typedText"></div>
+    <div class="hero-sub">Wedding Decor • Choreography • Grand Celebrations | Maharashtra</div>
+    <button class="btn-gold ripple" id="exploreBtn">Begin Your Journey</button>
+  </div>
+</section>
+
+<section id="services" class="services"><h2 class="section-title" data-aos="fade-up">Our Signature Services</h2><div class="services-grid" id="servicesGrid"></div></section>
+<section id="choreography" class="choreography"><h2 class="section-title" data-aos="fade-up">✧ Choreography Stories ✧</h2><div class="choreo-grid" id="choreoGrid"></div></section>
+<section id="events" class="events-gallery"><h2 class="section-title" data-aos="fade-up">Moments in Gold</h2><div class="gallery-grid" id="galleryGrid"></div></section>
+<section id="testimonials" class="testimonials"><h2 class="section-title" data-aos="fade-up">Royal Whispers</h2><div class="swiper testimonialSwiper"><div class="swiper-wrapper"><div class="swiper-slide"><div class="testimonial-card"><i class="fas fa-quote-right"></i><p>"The decor was beyond imagination. J&K Events turned our wedding into a royal saga. Choreography was pure magic!"</p><h4>– Diya & Rohan</h4></div></div><div class="swiper-slide"><div class="testimonial-card"><i class="fas fa-quote-right"></i><p>"Every detail glittered in gold. Our sangeet was the talk of the town. Highly recommend their premium service."</p><h4>– Meera Kapoor</h4></div></div><div class="swiper-slide"><div class="testimonial-card"><i class="fas fa-quote-right"></i><p>"Flawless coordination, breathtaking stage, and choreography that brought tears of joy. Best decision ever!"</p><h4>– Sharma Family</h4></div></div></div><div class="swiper-pagination"></div></div></section>
+<section id="build" class="build-event"><h2 class="section-title" data-aos="fade-up">Curate Your Dream Event</h2><div class="event-builder" data-aos="fade-up"><div class="builder-options" id="servicesOptions"><div class="option-card" data-service="Wedding Decor"><i class="fas fa-ring"></i><h4>Wedding Decor</h4></div><div class="option-card" data-service="Gourmet Catering"><i class="fas fa-utensils"></i><h4>Catering</h4></div><div class="option-card" data-service="Choreography"><i class="fas fa-music"></i><h4>Choreography</h4></div><div class="option-card" data-service="Photography & Film"><i class="fas fa-camera"></i><h4>Photography</h4></div><div class="option-card" data-service="Light & Sound"><i class="fas fa-lightbulb"></i><h4>Light & Sound</h4></div></div><div class="builder-summary"><h3><i class="fas fa-crown" style="color:gold;"></i> Your Selection</h3><ul class="summary-list" id="summaryList"><li>No services selected</li></ul><button class="btn-gold" id="requestQuoteBtn">Request Personalized Quote</button></div></div></section>
+<section id="contact" class="contact-section"><h2 class="section-title" data-aos="fade-up">Let's Create Elegance</h2><div class="contact-card" data-aos="zoom-in"><p><i class="fas fa-map-marker-alt" style="color:gold;"></i> Near Madhurban Phase-1, Khadi Road, Beed Bypass, Maharashtra</p><p style="margin:15px 0;"><i class="fas fa-phone-alt"></i> +91 9373695637 &nbsp;|&nbsp; +91 9011232286</p><button class="btn-gold" id="contactWhatsappBtn"><i class="fab fa-whatsapp"></i> WhatsApp Inquiry</button></div></section>
+
+<footer class="footer"><div class="logo" style="font-size:1.8rem;">J & K <span>Events</span></div><p>© 2025 — Bespoke Luxury Events. All rights reserved.</p></footer>
+
+<div id="modalGallery" class="gallery-modal"><div class="modal-container"><div class="modal-nav modal-prev" id="modalPrev"><i class="fas fa-chevron-left"></i></div><div class="modal-nav modal-next" id="modalNext"><i class="fas fa-chevron-right"></i></div><div class="modal-close" id="modalClose"><i class="fas fa-times"></i></div><img id="modalImage" class="modal-main-image" alt="Gallery Image"><div class="modal-counter" id="modalCounter">1 / 1</div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 800, once: false, mirror: true, offset: 80 });
+
+  const phrases = ["Eternal Elegance.", "Golden Celebrations.", "Flawless Choreography.", "J & K Events."];
+  let i = 0, j = 0, currentPhrase = [], isDeleting = false;
+  const typedEl = document.getElementById("typedText");
+  function typeEffect() {
+    const fullText = phrases[i];
+    if (isDeleting) currentPhrase = fullText.substring(0, currentPhrase.length - 1);
+    else currentPhrase = fullText.substring(0, currentPhrase.length + 1);
+    typedEl.innerHTML = currentPhrase + '<span class="cursor">|</span>';
+    let speed = isDeleting ? 70 : 130;
+    if (!isDeleting && currentPhrase === fullText) { speed = 1400; isDeleting = true; }
+    else if (isDeleting && currentPhrase === "") { isDeleting = false; i = (i+1)%phrases.length; speed = 350; }
+    setTimeout(typeEffect, speed);
+  }
+  typeEffect();
+
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = (winScroll / height) * 100;
+    document.getElementById('progressBar').style.width = scrolled + "%";
+  });
+
+  const hamburger = document.getElementById('hamburger');
+  const navLinksMenu = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => navLinksMenu.classList.toggle('active'));
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if(target) { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); navLinksMenu.classList.remove('active'); }
+    });
+  });
+  document.getElementById('exploreBtn')?.addEventListener('click',()=>{ document.getElementById('services').scrollIntoView({behavior:'smooth'}); });
+
+  const gallerySets = {
+    "Wedding Decoration": ["./images/wedding1.jpg", "./images/wedding2.jpg", "./images/wedding3.jpg", "./images/wedding4.jpg", "./images/wedding5.jpg", "./images/wedding6.jpg", "./images/wedding7.jpg", "./images/wedding8.jpg", "./images/wedding9.jpg", "./images/wedding10.jpg"],
+    "Gourmet Catering": ["./images/catering1.jpg", "./images/catering2.jpg", "./images/catering3.jpg", "./images/catering4.jpg", "./images/catering5.jpg", "./images/catering6.jpg", "./images/catering7.jpg", "./images/catering8.jpg", "./images/catering9.jpg", "./images/catering10.jpg"],
+    "Birthday Extravaganza": ["./images/birthday1.jpg", "./images/birthday2.jpg", "./images/birthday3.jpg", "./images/birthday4.jpg", "./images/birthday5.jpg", "./images/birthday6.jpg", "./images/birthday7.jpg", "./images/birthday8.jpg", "./images/birthday9.jpg", "./images/birthday10.jpg"],
+    "Full Management": ["./images/event1.jpg", "./images/event2.jpg", "./images/event.jpg"],
+    "Bride & Groom": ["./images/bd dance.jpeg", "./images/bd dance.png", "./images/bd dance3.png"],
+    "Family Ensemble": ["./images/f1.jpg", "./images/f2.jpg", "./images/f3.jpg", "./images/f4.jpg", "./images/f5.jpg", "./images/f6.jpg"],
+    "Friends Squad": ["./images/frnd.jpg", "./images/frnd2.jpg", "./images/frnd3.jpg", "./images/frnd4.jpg", "./images/frnd5.jpg", "./images/frnd6.jpg", "./images/frnd7.jpg"],
+    "Theme Entry": ["./images/entry.jpg", "./images/enty2.jpg", "./images/enty3.jpg", "./images/enty4.jpg", "./images/enty5.jpg", "./images/enty6.jpg", "./images/enty7.jpg", "./images/enty8.jpg"]
+  };
+
+  const servicesData = [
+    { title: "Wedding Decoration", img: "./images/p.jpg", desc: "Luxury floral, mandaps & ambient lighting", icon: "fas fa-ring", galleryKey: "Wedding Decoration" },
+    { title: "Gourmet Catering", img: "./images/p2.jpg", desc: "Exquisite culinary journeys", icon: "fas fa-utensils", galleryKey: "Gourmet Catering" },
+    { title: "Birthday Extravaganza", img: "./images/p3.jpg", desc: "Themed parties & luxury setups", icon: "fas fa-birthday-cake", galleryKey: "Birthday Extravaganza" },
+    { title: "Full Management", img: "./images/p4.jpg", desc: "End-to-end perfection & coordination", icon: "fas fa-calendar-check", galleryKey: "Full Management" }
+  ];
+  const choreoData = [
+    { title: "Bride & Groom", img: "./images/cover.jpg", desc: "Romantic first dance", galleryKey: "Bride & Groom" },
+    { title: "Family Ensemble", img: "./images/family.jpg", desc: "Multi-gen magic", galleryKey: "Family Ensemble" },
+    { title: "Friends Squad", img: "./images/frnd3.jpg", desc: "High energy Bollywood", galleryKey: "Friends Squad" },
+    { title: "Theme Entry", img: "./images/theme.jpg", desc: "Dramatic reveals", galleryKey: "Theme Entry" }
+  ];
+
+  const servicesGrid = document.getElementById('servicesGrid');
+  const choreoGrid = document.getElementById('choreoGrid');
+
+  function buildCard(item, type) {
+    const card = document.createElement('div');
+    card.className = type === 'service' ? 'service-card ripple' : 'choreo-card ripple';
+    const imgSrc = item.img;
+    const title = item.title;
+    const desc = item.desc;
+    const iconHtml = type === 'service' ? `<i class="${item.icon}"></i>` : '';
+    card.innerHTML = `<img class="${type === 'service' ? 'service-img' : 'choreo-img'}" src="${imgSrc}" alt="${title}"><div class="${type === 'service' ? 'service-info' : 'choreo-info'}">${iconHtml}<h3>${title}</h3><p>${desc}</p></div>`;
+    card.addEventListener('click', () => openModalWithGallery(item.galleryKey, title));
+    return card;
+  }
+
+  servicesData.forEach(s => servicesGrid.appendChild(buildCard(s, 'service')));
+  choreoData.forEach(c => choreoGrid.appendChild(buildCard(c, 'choreo')));
+
+  const modal = document.getElementById('modalGallery');
+  const modalImg = document.getElementById('modalImage');
+  const modalPrevBtn = document.getElementById('modalPrev');
+  const modalNextBtn = document.getElementById('modalNext');
+  const modalClose = document.getElementById('modalClose');
+  const modalCounterSpan = document.getElementById('modalCounter');
+  let currentGalleryImages = [];
+  let currentIndex = 0;
+
+  function openModalWithGallery(galleryKey, title) {
+    if (!gallerySets[galleryKey]) currentGalleryImages = ["./images/c.jpg"];
+    else currentGalleryImages = gallerySets[galleryKey];
+    currentIndex = 0;
+    updateModalImage();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function updateModalImage() {
+    if (currentGalleryImages.length) {
+      modalImg.src = currentGalleryImages[currentIndex];
+      modalCounterSpan.innerText = `${currentIndex+1} / ${currentGalleryImages.length}`;
+      modalImg.style.animation = 'none';
+      modalImg.offsetHeight;
+      modalImg.style.animation = 'zoomFadeIn 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
+    }
+  }
+
+  function nextImage() { if (currentGalleryImages.length) { currentIndex = (currentIndex + 1) % currentGalleryImages.length; updateModalImage(); } }
+  function prevImage() { if (currentGalleryImages.length) { currentIndex = (currentIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length; updateModalImage(); } }
+
+  modalPrevBtn.addEventListener('click', prevImage);
+  modalNextBtn.addEventListener('click', nextImage);
+  modalClose.addEventListener('click', () => { modal.classList.remove('active'); document.body.style.overflow = ''; });
+  modal.addEventListener('click', (e) => { if(e.target === modal) { modal.classList.remove('active'); document.body.style.overflow = ''; } });
+
+  let touchStartX = 0, touchEndX = 0;
+  modal.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+  modal.addEventListener('touchend', (e) => { touchEndX = e.changedTouches[0].screenX; const diff = touchEndX - touchStartX; if (Math.abs(diff) > 50) diff > 0 ? prevImage() : nextImage(); });
+  document.addEventListener('keydown', (e) => { if (!modal.classList.contains('active')) return; if (e.key === 'ArrowLeft') prevImage(); else if (e.key === 'ArrowRight') nextImage(); else if (e.key === 'Escape') { modal.classList.remove('active'); document.body.style.overflow = ''; } });
+
+  const optionCards = document.querySelectorAll('.option-card');
+  const summaryList = document.getElementById('summaryList');
+  let selectedBuildServices = [];
+  function updateBuildSummary() {
+    summaryList.innerHTML = '';
+    if(selectedBuildServices.length === 0) summaryList.innerHTML = '<li>✨ Select services to begin your dream event</li>';
+    else selectedBuildServices.forEach(serv => { const li = document.createElement('li'); li.innerHTML = `<i class="fas fa-check-circle" style="color:gold;"></i> ${serv}`; summaryList.appendChild(li); });
+  }
+  optionCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const name = this.querySelector('h4')?.innerText || this.dataset.service;
+      const exists = selectedBuildServices.includes(name);
+      if(exists) { selectedBuildServices = selectedBuildServices.filter(s => s !== name); this.classList.remove('selected'); }
+      else { selectedBuildServices.push(name); this.classList.add('selected'); }
+      updateBuildSummary();
+    });
+  });
+  document.getElementById('requestQuoteBtn').addEventListener('click',()=>{ if(selectedBuildServices.length === 0) alert("Please select at least one service to craft your luxury event."); else { const msg = `Hello J&K Events! I'm interested in: ${selectedBuildServices.join(', ')}. Let's plan my grand celebration.`; window.open(`https://wa.me/919373695637?text=${encodeURIComponent(msg)}`,'_blank'); } });
+  document.getElementById('contactWhatsappBtn')?.addEventListener('click',()=>{ window.open("https://wa.me/919373695637?text=Hello! I'd love to create a luxurious event with J&K Events.","_blank"); });
+  ["whatsappFloat","callFloat","instaFloat"].forEach(id=>{ const btn = document.getElementById(id); if(id === "whatsappFloat") btn?.addEventListener('click',()=>window.open("https://wa.me/919373695637", "_blank")); if(id === "callFloat") btn?.addEventListener('click',()=>window.location.href = "tel:9373695637"); if(id === "instaFloat") btn?.addEventListener('click',()=>window.open("https://instagram.com", "_blank")); });
+
+  const galleryImages = ["./images/catering1.jpg", "./images/wedding4.jpg", "./images/event2.jpg", "./images/birthday7.jpg", "./images/f3.jpg", "./images/bd dance.png", "./images/enty6.jpg", "./images/frnd6.jpg"];
+  const galleryContainer = document.getElementById('galleryGrid');
+  galleryImages.forEach(src => {
+    const div = document.createElement('div'); div.className = 'gallery-item';
+    div.innerHTML = `<img src="${src}" loading="lazy"><div class="gallery-overlay"><i class="fas fa-expand-alt"></i><p style="color:white;">View Moment</p></div>`;
+    div.addEventListener('click', () => { currentGalleryImages = galleryImages; currentIndex = galleryImages.indexOf(src); if(currentIndex === -1) currentIndex = 0; updateModalImage(); modal.classList.add('active'); document.body.style.overflow = 'hidden'; });
+    galleryContainer.appendChild(div);
+  });
+  new Swiper('.testimonialSwiper', { loop: true, autoplay: { delay: 4200, disableOnInteraction: false }, pagination: { el: '.swiper-pagination', clickable: true }, slidesPerView: 1, breakpoints: { 768: { slidesPerView: 2, spaceBetween: 25 } } });
+  document.querySelectorAll('.btn-gold, .fab-btn, .option-card, .service-card, .choreo-card').forEach(el => el.classList.add('ripple'));
+
+  // ===== PREMIUM ENHANCEMENTS =====
+  (function initCustomCursor() {
+    const cursor = document.createElement('div'); cursor.className = 'custom-cursor'; document.body.appendChild(cursor);
+    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+    document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+    function animateCursor() { const dx = mouseX - cursorX, dy = mouseY - cursorY; cursorX += dx * 0.15; cursorY += dy * 0.15; cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`; requestAnimationFrame(animateCursor); } animateCursor();
+    document.querySelectorAll('button, .btn-gold, .fab-btn, .service-card, .choreo-card, .gallery-item, .option-card, .nav-links a').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+    document.addEventListener('mouseleave', () => cursor.style.opacity = '0'); document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
+  })();
+  (function initPreloader() {
+    const preloader = document.createElement('div'); preloader.className = 'preloader'; preloader.innerHTML = `<div class="preloader-ring"></div><div class="preloader-text">J & K EVENTS</div>`; document.body.appendChild(preloader);
+    window.addEventListener('load', () => { setTimeout(() => { preloader.classList.add('fade-out'); setTimeout(() => preloader.remove(), 800); }, 800); });
+  })();
+  (function initScrollReveal() {
+    const sections = document.querySelectorAll('section');
+    function checkReveal() { const windowHeight = window.innerHeight; sections.forEach(section => { const rect = section.getBoundingClientRect(); if (rect.top < windowHeight - 150 && rect.bottom > 100) section.classList.add('revealed'); }); }
+    setTimeout(checkReveal, 100); window.addEventListener('scroll', checkReveal); window.addEventListener('resize', checkReveal);
+  })();
+  (function initParticles() {
+    const particleContainer = document.createElement('div'); particleContainer.className = 'particle-canvas'; document.body.appendChild(particleContainer);
+    for (let i = 0; i < 25; i++) { const particle = document.createElement('div'); particle.className = 'particle'; const size = Math.random() * 3 + 1; particle.style.width = `${size}px`; particle.style.height = `${size}px`; particle.style.left = `${Math.random() * 100}%`; particle.style.bottom = `-20px`; particle.style.animationDelay = `${Math.random() * 10}s`; particle.style.animationDuration = `${Math.random() * 6 + 5}s`; particleContainer.appendChild(particle); }
+  })();
+  (function initNavbarScroll() { const navbar = document.querySelector('.navbar'); if (navbar) { window.addEventListener('scroll', () => { if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); }); } })();
+</script>
+</body>
+</html>
